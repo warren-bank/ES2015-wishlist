@@ -12,8 +12,11 @@
  * - Number.parseInt('0b11') === 0    // literal notation supported in ES6, parseInt not supported
  * - Number.parseInt('0o77') === 0    // literal notation supported in ES6, parseInt not supported
  *
+ * issue case #:
+ *   https://github.com/tc39/ecma262/issues/927
+ *
  * workaround:
- * - detect notation and assign proper radix
+ *   detect notation, trim prefix, assign proper radix
  **/
 Number.parseInt = function(val, radix){
   var regex = /^0([box])(.+)$/i
