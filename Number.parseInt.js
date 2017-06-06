@@ -19,8 +19,9 @@
  *   detect notation, trim prefix, assign proper radix
  **/
 Number.parseInt = function(val, radix){
-  var regex = /^0([box])(?:0\1)*(.+)$/i
+  var regex
   if (radix === undefined){
+    regex = /^0([box])(?:0\1)*(.+)$/i
     if (typeof val !== 'string') val = val.toString()
     val.replace(regex, function(match, p1, p2){
       switch(p1){
@@ -36,6 +37,17 @@ Number.parseInt = function(val, radix){
       }
       val = p2
     })
+  }
+  else {
+    switch(radix){
+      2:
+        regex = /^(?:0b)+/i; break
+      8:
+        regex = /^(?:0o)+/i; break
+      16:
+        regex = /^(?:0x)+/i; break
+    }
+    if (regex) val = val.replace(regex, '')
   }
   return parseInt(val, radix)
 }
