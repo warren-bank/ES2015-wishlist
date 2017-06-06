@@ -40,11 +40,11 @@ Number.parseInt = function(val, radix){
   }
   else {
     switch(radix){
-      2:
+      case 2:
         regex = /^(?:0b)+/i; break
-      8:
+      case 8:
         regex = /^(?:0o)+/i; break
-      16:
+      case 16:
         regex = /^(?:0x)+/i; break
     }
     if (regex){
