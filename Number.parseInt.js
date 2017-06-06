@@ -19,21 +19,23 @@
  *   detect notation, trim prefix, assign proper radix
  **/
 Number.parseInt = function(val, radix){
-  var regex = /^0([box])(.+)$/i
-  if (typeof val !== 'string') val = val.toString()
-  val.replace(regex, function(match, p1, p2){
-    switch(p1){
-      case 'b':
-      case 'B':
-        radix = 2; break
-      case 'o':
-      case 'O':
-        radix = 8; break
-      case 'x':
-      case 'X':
-        radix = 16; break
-    }
-    val = p2
-  })
+  var regex = /^0([box])(?:0\1)*(.+)$/i
+  if (radix === undefined){
+    if (typeof val !== 'string') val = val.toString()
+    val.replace(regex, function(match, p1, p2){
+      switch(p1){
+        case 'b':
+        case 'B':
+          radix = 2; break
+        case 'o':
+        case 'O':
+          radix = 8; break
+        case 'x':
+        case 'X':
+          radix = 16; break
+      }
+      val = p2
+    })
+  }
   return parseInt(val, radix)
 }
