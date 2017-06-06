@@ -20,9 +20,9 @@
  **/
 Number.parseInt = function(val, radix){
   var regex, result
+  if (typeof val !== 'string') val = val.toString()
   if (radix === undefined){
     regex = /^0([box])(?:0\1)*(.+)$/i
-    if (typeof val !== 'string') val = val.toString()
     val.replace(regex, function(match, p1, p2){
       switch(p1){
         case 'b':
@@ -48,7 +48,6 @@ Number.parseInt = function(val, radix){
         regex = /^(?:0x)+/i; break
     }
     if (regex){
-      if (typeof val !== 'string') val = val.toString()
       val = val.replace(regex, '')
     }
   }
