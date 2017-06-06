@@ -47,7 +47,10 @@ Number.parseInt = function(val, radix){
       16:
         regex = /^(?:0x)+/i; break
     }
-    if (regex) val = val.replace(regex, '')
+    if (regex){
+      if (typeof val !== 'string') val = val.toString()
+      val = val.replace(regex, '')
+    }
   }
   return parseInt(val, radix)
 }
