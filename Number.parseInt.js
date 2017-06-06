@@ -19,7 +19,7 @@
  *   detect notation, trim prefix, assign proper radix
  **/
 Number.parseInt = function(val, radix){
-  var regex
+  var regex, result
   if (radix === undefined){
     regex = /^0([box])(?:0\1)*(.+)$/i
     if (typeof val !== 'string') val = val.toString()
@@ -52,5 +52,9 @@ Number.parseInt = function(val, radix){
       val = val.replace(regex, '')
     }
   }
-  return parseInt(val, radix)
+
+  result = parseInt(val, radix)
+  result = ((! Number.isNaN(result)) && (result.toString(radix) === val)) ? result : NaN
+
+  return result
 }
