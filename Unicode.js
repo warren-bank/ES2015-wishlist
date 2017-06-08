@@ -24,14 +24,13 @@ Unicode.parse = function(str){
 
 // ----------------------------------------------------------------------
 
-Unicode.normalize = function(str, method){
+Unicode.normalize = function(str, method=''){
   var next, result, regex
 
   if ((Array.isArray(method)) && (method.length)){
     next = method
     method = next.shift()
   }
-  method = method || 'strip'
 
   switch(method){
     case 'normalize':
@@ -47,6 +46,10 @@ Unicode.normalize = function(str, method){
       result = str.replace(regex, function(match, symbol, marks) {
         return symbol
       })
+      break
+
+    default:
+      result = str
       break
   }
 
