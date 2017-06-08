@@ -92,6 +92,18 @@ Unicode.charAt = function(str, index, method=['normalize','strip']){
 
 // ----------------------------------------------------------------------
 
+Unicode.isEqual = function(str1, str2){
+  var result
+
+  str1 = Unicode.normalize(str1, 'normalize')
+  str2 = Unicode.normalize(str2, 'normalize')
+
+  result = (str1 === str2)
+  return result
+}
+
+// ----------------------------------------------------------------------
+
 /**
  * references:
  *     https://mathiasbynens.be/notes/javascript-unicode
