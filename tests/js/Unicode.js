@@ -4,8 +4,13 @@ const Unicode = require('../../Unicode')
 const assert = require('assert')
 
 const strings = {
-  astral_char: '\uD83D\uDCA9',
-  many_marks: '\\u{5A}\\u{351}\\u{36B}\\u{343}\\u{36A}\\u{302}\\u{36B}\\u{33D}\\u{34F}\\u{334}\\u{319}\\u{324}\\u{31E}\\u{349}\\u{35A}\\u{32F}\\u{31E}\\u{320}\\u{34D}\\u{41}\\u{36B}\\u{357}\\u{334}\\u{362}\\u{335}\\u{31C}\\u{330}\\u{354}\\u{4C}\\u{368}\\u{367}\\u{369}\\u{358}\\u{320}\\u{47}\\u{311}\\u{357}\\u{30E}\\u{305}\\u{35B}\\u{341}\\u{334}\\u{33B}\\u{348}\\u{34D}\\u{354}\\u{339}\\u{4F}\\u{342}\\u{30C}\\u{30C}\\u{358}\\u{328}\\u{335}\\u{339}\\u{33B}\\u{31D}\\u{333}\\u{21}\\u{33F}\\u{30B}\\u{365}\\u{365}\\u{302}\\u{363}\\u{310}\\u{301}\\u{301}\\u{35E}\\u{35C}\\u{356}\\u{32C}\\u{330}\\u{319}\\u{317}'
+  raw: {
+    astral_char: '\uD83D\uDCA9',
+    single_mark: 'foo\u0303'
+  },
+  escaped: {
+    many_marks: '\\u{5A}\\u{351}\\u{36B}\\u{343}\\u{36A}\\u{302}\\u{36B}\\u{33D}\\u{34F}\\u{334}\\u{319}\\u{324}\\u{31E}\\u{349}\\u{35A}\\u{32F}\\u{31E}\\u{320}\\u{34D}\\u{41}\\u{36B}\\u{357}\\u{334}\\u{362}\\u{335}\\u{31C}\\u{330}\\u{354}\\u{4C}\\u{368}\\u{367}\\u{369}\\u{358}\\u{320}\\u{47}\\u{311}\\u{357}\\u{30E}\\u{305}\\u{35B}\\u{341}\\u{334}\\u{33B}\\u{348}\\u{34D}\\u{354}\\u{339}\\u{4F}\\u{342}\\u{30C}\\u{30C}\\u{358}\\u{328}\\u{335}\\u{339}\\u{33B}\\u{31D}\\u{333}\\u{21}\\u{33F}\\u{30B}\\u{365}\\u{365}\\u{302}\\u{363}\\u{310}\\u{301}\\u{301}\\u{35E}\\u{35C}\\u{356}\\u{32C}\\u{330}\\u{319}\\u{317}'
+  }
 }
 
 var fails=0
@@ -13,7 +18,8 @@ var fails=0
 var functions = []
 
 functions.push(() => {
-  var str = strings.astral_char
+  var str
+  str = strings.raw.astral_char
   assert.strictEqual(
     Unicode.parse( Unicode.stringify(str) ),
     str,
@@ -22,7 +28,8 @@ functions.push(() => {
 })
 
 functions.push(() => {
-  var str = strings.many_marks
+  var str
+  str = strings.escaped.many_marks
   assert.strictEqual(
     Unicode.normalize( Unicode.parse(str), 'strip' ),
     'ZALGO!',
@@ -37,13 +44,24 @@ functions.push(() => {
 
 functions.push(() => {
   var str
-  str = strings.astral_char
+  str = strings.raw.astral_char
   assert.strictEqual(
     Unicode.length(str),
     1,
-    'Unicode string containing a single code point comprised of multiple code units has a length of 1.'
+    'Unicode string containing a single code point comprised of multiple code units (surrogate pair) has a length of 1.'
   )
-  str = strings.many_marks
+  str = strings.raw.single_mark
+  assert.strictEqual(
+    Unicode.length(str, ''),
+    4,
+    'Unicode string containing 3 ascii characters and a final combining mark is NOT normalized and has a length of 4 (code points).'
+  )
+  assert.strictEqual(
+    Unicode.length(str, 'normalize'),
+    3,
+    'Unicode string containing 3 ascii characters and a final combining mark is normalized (using the "normalize" method) and has a length of 3 (code points).'
+  )
+  str = strings.escaped.many_marks
   assert.strictEqual(
     Unicode.length( Unicode.parse(str) ),
     6,
@@ -52,7 +70,14 @@ functions.push(() => {
 })
 
 functions.push(() => {
-  var str = strings.many_marks
+  var str
+  str = strings.raw.single_mark
+  assert.strictEqual(
+    Unicode.charAt( str, 2 ),
+    'õ',
+    'Unicode string containing 3 ascii characters and a final combining mark is normalized (1st using the "normalize" method, then using the "strip" method) to a string having the code point at position #2 equal to the non-ascii character "õ").'
+  )
+  str = strings.escaped.many_marks
   assert.strictEqual(
     Unicode.charAt( Unicode.parse(str), 0 ),
     '\u{5a}',
