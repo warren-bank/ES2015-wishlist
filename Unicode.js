@@ -75,12 +75,18 @@ Unicode.length = function(str, method=['normalize','strip']){
 // ----------------------------------------------------------------------
 
 Unicode.charAt = function(str, index, method=['normalize','strip']){
-  var result
+  var len, result
 
   str = Unicode.normalize(str, method)
+  len = Unicode.length(str, '')
 
-  result = str.codePointAt(index)
-  result = String.fromCodePoint(result)
+  if ((index < 0) || (index >= len)){
+    result = ''
+  }
+  else {
+    result = str.codePointAt(index)
+    result = String.fromCodePoint(result)
+  }
   return result
 }
 
