@@ -75,18 +75,18 @@ functions.push(() => {
   assert.strictEqual(
     Unicode.charAt( str, 2 ),
     'õ',
-    'Unicode string containing 3 ascii characters and a final combining mark is normalized (1st using the "normalize" method, then using the "strip" method) to a string having the code point at position #2 equal to the non-ascii character "õ").'
+    'Unicode string containing 3 ascii characters and a final combining mark is normalized (1st using the "normalize" method, then using the "strip" method) to a string having the code point at position #2 equal to the non-ascii character "õ".'
   )
   str = strings.escaped.many_marks
   assert.strictEqual(
     Unicode.charAt( Unicode.parse(str), 0 ),
     '\u{5a}',
-    'Unicode string containing 6 ascii characters, each decorated by MANY combining marks, is normalized (1st using the "normalize" method, then using the "strip" method) to a string having the code point at position #0 equal to the ascii character "Z").'
+    'Unicode string containing 6 ascii characters, each decorated by MANY combining marks, is normalized (1st using the "normalize" method, then using the "strip" method) to a string having the code point at position #0 equal to the ascii character "Z".'
   )
   assert.strictEqual(
     Unicode.charAt( Unicode.parse(str), 1 ),
     '\u{41}',
-    'Unicode string containing 6 ascii characters, each decorated by MANY combining marks, is normalized (1st using the "normalize" method, then using the "strip" method) to a string having the code point at position #1 equal to the ascii character "A").'
+    'Unicode string containing 6 ascii characters, each decorated by MANY combining marks, is normalized (1st using the "normalize" method, then using the "strip" method) to a string having the code point at position #1 equal to the ascii character "A".'
   )
   assert.strictEqual(
     String.fromCharCode(0x005a),
@@ -108,10 +108,11 @@ functions.push(() => {
     '\u{41}',
     'Unicode representation of ascii character "A" is the same as a string constructed from its literal notation.'
   )
+  str = strings.raw.astral_char
   assert.strictEqual(
-    Unicode.charAt( Unicode.parse(str), 5 ),
-    '!',
-    'Unicode string containing 6 ascii characters, each decorated by MANY combining marks, is normalized (1st using the "normalize" method, then using the "strip" method) to a string having the code point at position #5 equal to the ascii character "!").'
+    Unicode.charAt( `${str}${str}`, 1, '' ),
+    str,
+    'Unicode string containing 2 identical astral characters is NOT normalized (because it would have no effect) and the code point at position #1 is exactly equal to one of the original astral characters.'
   )
 })
 
