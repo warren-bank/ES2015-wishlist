@@ -85,6 +85,20 @@ functions.push(() => {
   })
 })
 
+functions.push(() => {
+  // example: fapply a Function that returns its input parameters
+  return Promise.fapply((...args) => {
+    return args
+  }, ['a','b','c',1,2,3])
+  .then((result) => {
+    assert.deepStrictEqual(
+      result,
+      ['a','b','c',1,2,3],
+      'fapply returns a copy of input parameters'
+    )
+  })
+})
+
 functions.forEach((f) => {
   promises.push( f() )
 })
