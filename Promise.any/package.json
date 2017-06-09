@@ -1,5 +1,5 @@
 {
-  "name": "@warren-bank/ES6-Promise-any",
+  "name": "@warren-bank/es6-promise-any",
   "version": "1.0.0",
   "main": "Promise.any.js",
   "description": "ES2015 wishlist: Promise.any()",
