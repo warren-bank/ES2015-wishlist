@@ -84,7 +84,9 @@ Unicode.charAt = function(str, index, method=['normalize','strip']){
     result = ''
   }
   else {
-    result = str.codePointAt(index)
+    str = Array.from(str)[index]
+
+    result = str.codePointAt(0)
     result = String.fromCodePoint(result)
   }
   return result

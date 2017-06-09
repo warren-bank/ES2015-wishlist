@@ -1,6 +1,6 @@
 {
   "name": "@warren-bank/es6-unicode",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "Unicode.js",
   "description": "ES2015 wishlist: Unicode library",
   "author": "Warren Bank (https://github.com/warren-bank)",

@@ -108,6 +108,11 @@ functions.push(() => {
     '\u{41}',
     'Unicode representation of ascii character "A" is the same as a string constructed from its literal notation.'
   )
+  assert.strictEqual(
+    Unicode.charAt( Unicode.parse(str), 5 ),
+    '!',
+    'Unicode string containing 6 ascii characters, each decorated by MANY combining marks, is normalized (1st using the "normalize" method, then using the "strip" method) to a string having the code point at position #5 equal to the ascii character "!").'
+  )
 })
 
 functions.forEach((f) => {
