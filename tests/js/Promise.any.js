@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-const Unicode = require('../../Promise.any')
-const assert = require('assert')
+require('../../Promise.any')
 
-var fails=0
+const assert = require('assert')
 
 var functions = []
 var promises = []
+var fails=0
 var count
 
 functions.push(() => {
