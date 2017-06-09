@@ -1,6 +1,6 @@
 {
   "name": "@warren-bank/es6-promise-fcall",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "Promise.fcall.js",
   "description": "ES2015 wishlist: Promise.fcall()",
   "author": "Warren Bank (https://github.com/warren-bank)",

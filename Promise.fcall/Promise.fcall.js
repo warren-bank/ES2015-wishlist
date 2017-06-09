@@ -37,6 +37,20 @@ Promise.fcall = function(f, ...args) {
 // ----------------------------------------------------------------------
 
 /**
+ * syntactic sugar
+ *
+ * summary:
+ * ========
+ *   - input parameters for Function are passed as an Array
+ *   - delegate to fcall using the spread operator
+ **/
+Promise.fapply = function(f, args){
+  return Promise.fcall(f, ...args)
+}
+
+// ----------------------------------------------------------------------
+
+/**
  * references:
  *     http://documentup.com/kriskowal/q/
  **/
