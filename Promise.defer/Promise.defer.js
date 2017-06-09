@@ -1,7 +1,7 @@
 /**
  * overview:
  * =========
- * Q.deferred():
+ * Q.defer():
  *   - not included in ES6
  *   - provides a simple and elegant way to create a new Promise
  *   - return value is an Object:
@@ -13,10 +13,10 @@
  *
  * summary:
  * ========
- * Promise.deferred():
- *   - Function that returns an Object having the same API surface as Q.deferred()
+ * Promise.defer():
+ *   - Function that returns an Object having the same API surface as Q.defer()
  **/
-Promise.deferred = function() {
+Promise.defer = function() {
   var result = {}
   result.promise = new Promise((resolve, reject) => {
     result.resolve = resolve

@@ -1,0 +1,14 @@
+{
+  "name": "@warren-bank/es6-promise-defer",
+  "version": "1.0.0",
+  "main": "Promise.defer.js",
+  "description": "ES2015 wishlist: Promise.defer()",
+  "author": "Warren Bank (https://github.com/warren-bank)",
+  "license": "GPL-2.0",
+  "dependencies": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/warren-bank/ES2015-wishlist/tree/master/Promise.defer"
+  }
+}
