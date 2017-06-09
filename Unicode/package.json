@@ -1,0 +1,14 @@
+{
+  "name": "@warren-bank/ES6-Unicode",
+  "version": "1.0.0",
+  "main": "Unicode.js",
+  "description": "ES2015 wishlist: Unicode library",
+  "author": "Warren Bank (https://github.com/warren-bank)",
+  "license": "GPL-2.0",
+  "dependencies": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/warren-bank/ES2015-wishlist/tree/master/Unicode"
+  }
+}
