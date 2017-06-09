@@ -2,4 +2,5 @@
 
 log='./run.log'
 
-./js/Unicode.js &> "$log"
+./js/Unicode.js      &>  "$log"
+./js/Promise.any.js  &>> "$log"
