@@ -15,11 +15,11 @@
  * Promise.fcall():
  *   - same behavior as Q.fcall()
  **/
-Promise.fcall = function(f) {
+Promise.fcall = function(f, ...args) {
   return new Promise((resolve, reject) => {
     var result
     try {
-      result = f()
+      result = f(...args)
       Promise.resolve(result)
       .then((final_result) => {
         resolve(final_result)
